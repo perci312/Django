@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'apps/css/estilos.css'  %}">
+    
+</head>
+<body>
+    <header  id="inicio">
+        <input class="label-icon-menu" type="checkbox" id="btn-menu">
+        <label id="label-icon-menu" for="btn-menu" class="fas fa-bars"></label>
+        <nav class="menu-primero">
+            <ul>
+
+                <li><a href="{% url 'Contacto' %}">Contacto</a></li>
+                <li><a href="{% url 'Tienda' %}">Tienda</a></li>
+                <li><a href="{% url 'index' %}">Principal</a></li>
+                {% if perms.apps.view_juego %}
+                <li><a href="{% url 'listar_juegos' %}">Listar Juegos</a></li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'logout' %}">Cerrar sesión</a>
+                </li>
+                <li><a href="#">@{{user.username}}</a></li>
+
+                {% else %}
+                <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                <li><a href="{% url 'registro' %}">Registrate</a></li>
+
+                {% endif %}
+            </ul>
+
+        </nav>
+
+    </header>
+
+    
+
+     <div class="contenedor_contacto">
+            {% load crispy_forms_tags %}
+            <form action="" class ="form" method="post" enctype="multipart/form-data" >
+                <h2>Agregar VideoJuego</h2>
+                <hr>
+
+                {% csrf_token %} 
+
+                {{ form | crispy }}
+                <br>
+                <div class="d-flex justify-content-end">
+                    <input type="reset" value="Cancelar" class="btn btn-secondary"> 
+                    &nbsp;   
+                    <button type ="submit" id ="btnEnviar" class="btn btn-primary">Enviar</button>
+                    
+                </div>
+               
+            </form>
+            {{mensaje}}
+        </div>
+
+        <footer id="contacto">
+            <div class="contenedor footer-content">
+                <div class="contact-us">
+                    <h2 class="brand">ChileGameStore</h2>
+                    <p>2020 © Todos los derechos reservados</p>
+
+            </div>
+            <div class="line"></div>
+        </footer>
+    
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        {% if messages %}
+            {% for m in messages %}
+                <script>
+                    Swal.fire({
+                        "title":"Felicitaciones",
+                        "text":"{{m}}",
+                        "icon":"success"
+                    })
+                </script>
+            {% endfor %}
+        {% endif %}
+</body>
+</html>
