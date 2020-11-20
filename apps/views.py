@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required , permission_required
 def index(request):
     return render(request, 'apps/index.html')
 
-
+@login_required(login_url='/account/login/')
 def Contacto(request):
     data = {
         'form':ContactoForm()

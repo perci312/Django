@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 urlpatterns = [
     path('index/', index,name='index'),
     path('', index,name='index'),
-    path('Contacto/', Contacto,name='Contacto'),
+    path('Contacto/',Contacto,name='Contacto'),
     path('login/', login,name='login'),
     path('registro/', registro,name='registro'),
     path('Tienda/', Tienda,name='Tienda'),
@@ -18,6 +18,7 @@ urlpatterns = [
     path('listar_juegos/',listar_juegos,name="listar_juegos"),
     path('modificar_juego/<id>/',modificar_juego,name="modificar_juego"),
     path('eliminar_juego/<id>/',eliminar_juego,name="eliminar_juego"),
+    
     
 
 ]
