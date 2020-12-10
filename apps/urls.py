@@ -1,11 +1,15 @@
-from django.urls import path
+from django.urls import path, include
 from .views import index
 from .views import Contacto
 from .views import login
 from .views import registro
 from .views import Tienda
-from .views import agregar_juego,listar_juegos,modificar_juego,eliminar_juego
+from .views import agregar_juego,listar_juegos,modificar_juego,eliminar_juego,JuegoViewset
 from django.contrib.auth.decorators import login_required
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('juego', JuegoViewset)
 
 urlpatterns = [
     path('index/', index,name='index'),
@@ -18,6 +22,7 @@ urlpatterns = [
     path('listar_juegos/',listar_juegos,name="listar_juegos"),
     path('modificar_juego/<id>/',modificar_juego,name="modificar_juego"),
     path('eliminar_juego/<id>/',eliminar_juego,name="eliminar_juego"),
+    path('api/',include(router.urls)),
     
     
 

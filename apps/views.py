@@ -4,8 +4,24 @@ from .forms import ContactoForm,JuegoForm,CustomUserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required , permission_required
+from rest_framework import viewsets
+from .serializers import JuegoSerializer
 
 # Create your views here.
+
+class JuegoViewset(viewsets.ModelViewSet):
+    queryset = Juego.objects.all()
+    serializer_class = JuegoSerializer
+
+    def get_queryset(self):
+        juegos = Juego.objects.all()
+
+        nombre = self.request.GET.get('nombre')
+        if nombre:
+            juegos = juegos.filter(nombre__contains=nombre)
+
+        return juegos
+
 
 def index(request):
     return render(request, 'apps/index.html')
