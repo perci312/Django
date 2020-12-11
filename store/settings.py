@@ -32,6 +32,9 @@ MESSAGE_STORAGE="django.contrib.messages.storage.cookie.CookieStorage"
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+SOCIAL_AUTH_FACEBOOK_KEY = "3854385227953442"
+SOCIAL_AUTH_FACEBOOK_SECRET = "3c2d367268d85281a2415fe0a005e203"
+
 
 # Application definition
 
@@ -48,6 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'crispy_forms',
     'rest_framework',
+    'social_django',
+    'pwa',
     
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -141,4 +146,28 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 
 
 
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
+PWA_APP_NAME = "ChileGameStore"
+PWA_APP_DESCRIPTION = "Venta de juegos digitales"
+PWA_APP_THEME_COLOR = "#3477f5"
+PWA_APP_BACKGROUND_COLOR = "#5699F7"
+
+PWA_APP_ICONS = [
+    {
+        "src":"/static/apps/img/ChileGameStoreIcono.png",
+        "sizes":"160x160"
+    }
+]
+
+PWA_APP_ICONS_APPLE = [
+    {
+        "src":"/static/apps/img/ChileGameStoreIcono.png",
+        "sizes":"160x160"
+    }
+]
+
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR,"serviceworker.js")

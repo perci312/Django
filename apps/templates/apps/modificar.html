@@ -6,6 +6,9 @@
     <title>Document</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'apps/css/estilos.css'  %}">
+
+    {% load pwa %}
+    {% progressive_web_app_meta %}
 </head>
 <body>
     <header  id="inicio">
